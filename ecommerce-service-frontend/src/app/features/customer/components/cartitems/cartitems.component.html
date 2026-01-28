@@ -1,0 +1,88 @@
+<div class="shop-container">
+  @if (cartItemList().length > 0) {
+    <h2 class="cart-title">Your Shopping Cart</h2>
+
+    <div class="table-responsive">
+      <table class="cartitems-table">
+        <thead>
+        <tr>
+          <th>Product</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Subtotal</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+          @for (item of cartItemList(); track item.productId) {
+            <tr>
+              <td class="product-cell">
+                @if (item.byteImg) {
+                  <img [src]="'data:image/jpeg;base64,' + item.byteImg" class="thumb">
+                } @else {
+                  <div class="thumb placeholder-box"><span>No Image</span></div>
+                }
+                <div class="name-category">
+                  <span class="item-name">{{ item.productName }}</span>
+                </div>
+              </td>
+              <td class="price-cell">{{ item.price | currency }}</td>
+              <td>
+                <div class="quantity-control">
+                  <span>{{ item.quantity }}</span>
+                </div>
+              </td>
+              <td class="subtotal-cell">{{ (item.price * item.quantity) | currency }}</td>
+              <td>
+                <button class="btn-remove" (click)="remove(item.productId)">Remove</button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <div class="cart-summary">
+      <div class="summary-details">
+
+        <div class="coupon-section">
+          <label for="couponCode">Have a Coupon?</label>
+          <div class="coupon-input-group">
+            <input
+              id="couponCode"
+              type="text"
+              placeholder="Enter Code (e.g. SAVE10)"
+              [(ngModel)]="couponInput"
+              class="coupon-input">
+          </div>
+          <small class="coupon-hint">Discount applied at final step</small>
+        </div>
+
+        <hr class="summary-divider">
+
+        <div class="summary-line">
+          <span>Order Total:</span>
+          <span class="amount">{{ totalAmount() | currency }}</span>
+        </div>
+
+        <div class="summary-actions">
+          <button class="btn-checkout" (click)="onPlaceOrder()">
+            Proceed to Checkout
+          </button>
+          <button class="btn-clear-cart" (click)="deleteAllItems()">
+            Clear Entire Cart
+          </button>
+        </div>
+      </div>
+    </div>
+  } @else {
+    <div class="empty-state">
+      <div class="empty-icon">🛒</div>
+      <h3>Your cart is empty</h3>
+      <p>Looks like you haven't added anything to your cart yet.</p>
+      <button routerLink="/customer/products" class="btn-shop" (click)="goToProductList()">
+        Go Shopping
+      </button>
+    </div>
+  }
+</div>

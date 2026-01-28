@@ -1,0 +1,61 @@
+<div class="admin-container">
+  <h3>{{ isEditMode ? 'Edit Category' : 'Create New Category' }}</h3>
+
+  <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
+    <div class="form-field">
+      <label>Category Name</label>
+      <input formControlName="name" type="text" placeholder="Enter name">
+      <small *ngIf="categoryForm.get('name')?.errors?.['required']" class="error-text">
+        Name is required.
+      </small>
+      <small *ngIf="categoryForm.get('name')?.errors?.['minlength']" class="error-text">
+        The name is too short! It must be at least 3 characters.
+      </small>
+      <small *ngIf="categoryForm.get('name')?.errors?.['maxlength']" class="error-text">
+        The name is too short! It must be at least 50 characters.
+      </small>
+    </div>
+
+    <div class="form-field">
+      <label>Description</label>
+      <textarea formControlName="description" placeholder="Enter description"></textarea>
+      <small *ngIf="categoryForm.get('description')?.errors?.['maxLength']" class="error-text">
+        Description is too long! It must be maximum of 250 characters.
+      </small>
+    </div>
+
+    <button type="submit" [disabled]="categoryForm.invalid" [style.background-color]="categoryForm.invalid ? 'grey' : '#28a745'">
+      {{ isEditMode ? 'Update Category' : 'Save Category' }}
+    </button>
+
+    <button type="button" *ngIf="isEditMode" (click)="resetForm()">Cancel</button>
+  </form>
+
+  <hr>
+
+  <h4>Existing Categories</h4>
+  <div *ngIf="categories$ | async as categoriesList; else loading">
+    <table>
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let cat of categoriesList">
+        <td>{{ cat.id }}</td>
+        <td>{{ cat.name }}</td>
+        <td>
+          <button (click)="editCategory(cat)">Edit</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <ng-template #loading>
+    <p>Connecting to backend...</p>
+  </ng-template>
+</div>

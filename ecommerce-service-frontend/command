@@ -1,0 +1,47 @@
+ng new ecommerce-service-frontend
+
+app>>New>>Directory>>core
+app>>New>>Directory>>features
+app>>New>>Directory>>shared
+
+app>>features>>New>>Directory>>admin
+app>>features>>admin>>New>>Directory>>components
+app>>features>>admin>>New>>Directory>>services
+app>>features>>admin>>New>>Directory>>models
+
+app>>features>>New>>Directory>>customer
+app>>features>>customer>>New>>Directory>>components
+app>>features>>customer>>New>>Directory>>services
+app>>features>>customer>>New>>Directory>>models
+
+ng generate interface shared/models/category --type=model
+ng generate interface shared/models/product --type=model
+ng generate service features/admin/services/category --type=service
+ng generate component features/admin/components/category --type=component
+ng generate service features/admin/services/product --type=service
+ng generate component features/admin/components/product --type=component
+ng generate interface core/domain/coupon/coupon --type=model
+ng generate service core/domain/coupon/coupon --type=service
+ng generate component features/admin/components/coupon --type=component
+ng generate service features/customer/services/productlist --type=service
+ng generate component features/customer/components/productlist --type=component
+ng generate service features/customer/services/cart --type=service
+ng generate interface shared/models/cart --type=model
+ng generate component features/customer/components/cartitems --type=component
+ng generate service features/customer/services/customerorder --type=service
+ng generate interface shared/models/order --type=model
+ng generate component features/customer/components/customerorder --type=component
+ng generate component features/customer/components/customerorderdetails --type=component
+ng generate service features/admin/services/adminorder --type=service
+ng generate component features/admin/components/adminorder --type=component
+ng generate component features/admin/components/adminorderdetails --type=component
+ng generate interface features/admin/models/AnalyticsResponseDto --type=model
+ng generate service features/admin/services/analyticsService --type=service
+ng generate component features/admin/components/adminanalytics --type=component
+ng generate interface shared/models/user-role --type=model
+ng generate interface shared/models/login-request --type=model
+ng generate service core/services/auth --type=service
+ng generate guard core/guards/admin
+ng generate guard core/guards/customer
+ng generate component features/auth/login --type=component
+ng generate component features/auth/signup --type=component

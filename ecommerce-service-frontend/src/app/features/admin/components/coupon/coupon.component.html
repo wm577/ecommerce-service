@@ -1,0 +1,54 @@
+<div class="admin-container">
+  <h2>Coupon Management</h2>
+
+  <form [formGroup]="couponForm" (ngSubmit)="onSubmit()" class="coupon-form">
+    <div class="form-grid">
+      <input type="text" formControlName="code" placeholder="Code">
+      <input type="text" formControlName="name" placeholder="Name">
+      <input type="number" formControlName="discount" placeholder="Discount (%)">
+      <input type="Date" formControlName="expirationDate" placeholder="Expiration Date">
+    </div>
+    <div *ngIf="couponForm.get('code')?.invalid && couponForm.get('code')?.touched" style="color: red;">
+      Code is required (min 3 chars).
+    </div>
+    <div *ngIf="couponForm.get('name')?.invalid && couponForm.get('name')?.touched" style="color: red;">
+      Name is required.
+    </div>
+    <div *ngIf="couponForm.get('discount')?.invalid && couponForm.get('discount')?.touched" style="color: red;">
+      Discount is required.
+    </div>
+    <div *ngIf="couponForm.get('expirationDate')?.invalid && couponForm.get('expirationDate')?.touched" style="color: red;">
+      Expiration Date is required.
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" [disabled]="couponForm.invalid || isSaving" class="btn-new">
+        {{ isSaving ? 'Saving...' : 'Add Coupon' }}
+      </button>
+      <button type="button" (click)="resetForm()" class="btn-cancel">
+        Cancel
+      </button>
+    </div>
+  </form>
+
+  <hr>
+
+  <table class="product-table">
+    <thead>
+    <tr>
+      <th>Code</th>
+      <th>Name</th>
+      <th>Discount (%)</th>
+      <th>Expiration Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let cous of coupons">
+      <td>{{ cous.code }}</td>
+      <td>{{ cous.name }}</td>
+      <td>{{ cous.discount }}%</td>
+      <td>{{ cous.expirationDate | date:'mediumDate' }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

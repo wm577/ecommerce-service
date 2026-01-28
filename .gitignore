@@ -1,0 +1,10 @@
+.metadata/
+.settings/
+.project/
+.classpath
+target/
+bin/
+node_modules/
+.angular/
+dist/
+.vscode/

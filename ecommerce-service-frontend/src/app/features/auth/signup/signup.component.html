@@ -1,0 +1,64 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <h2>Sign Up</h2>
+
+    <div *ngIf="errorMessage" class="error-banner">
+      {{ errorMessage }}
+    </div>
+
+    <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input
+          id="name"
+          type="name"
+          formControlName="name"
+          placeholder="Enter name"
+          [class.invalid]="signUpForm.get('name')?.invalid && signUpForm.get('email')?.touched">
+
+        <small class="error-text" *ngIf="signUpForm.get('name')?.errors?.['required'] && signUpForm.get('email')?.touched">
+          Name is required.
+        </small>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          placeholder="Enter email"
+          [class.invalid]="signUpForm.get('email')?.invalid && signUpForm.get('email')?.touched">
+
+        <small class="error-text" *ngIf="signUpForm.get('email')?.errors?.['required'] && signUpForm.get('email')?.touched">
+          Email is required.
+        </small>
+        <small class="error-text" *ngIf="signUpForm.get('email')?.errors?.['email'] && signUpForm.get('email')?.touched">
+          Please enter a valid email address.
+        </small>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          id="password"
+          type="password"
+          formControlName="password"
+          placeholder="Enter password"
+          [class.invalid]="signUpForm.get('password')?.invalid && signUpForm.get('password')?.touched">
+
+        <small class="error-text" *ngIf="signUpForm.get('password')?.errors?.['required'] && signUpForm.get('password')?.touched">
+          Password is required.
+        </small>
+        <small class="error-text" *ngIf="signUpForm.get('password')?.errors?.['minlength'] && signUpForm.get('password')?.touched">
+          Password must be at least 5 characters.
+        </small>
+      </div>
+
+      <button type="submit" [disabled]="signUpForm.invalid">
+        Sign Up
+      </button>
+    </form>
+  </div>
+</div>

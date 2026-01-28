@@ -1,0 +1,94 @@
+<div class="admin-container">
+  <h2>Product Management</h2>
+
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="product-form">
+    <div class="form-grid">
+      <input type="text" formControlName="name" placeholder="Product Name">
+      <input type="number" formControlName="price" placeholder="Price ($)">
+
+      <select formControlName="categoryId">
+        <option [ngValue]="null">Select Category</option>
+        <option *ngFor="let cat of categories" [ngValue]="cat.id">
+          {{ cat.name }}
+        </option>
+      </select>
+
+      <input type="number" formControlName="quantity" placeholder="Stock Quantity">
+      <div class="status-toggle">
+        <label>
+          <input type="checkbox" formControlName="isActive">
+          Product is Active
+        </label>
+      </div>
+      <div class="image-section">
+        <input type="file" (change)="onFileSelected($event)" accept="image/*">
+
+        <div *ngIf="isEditMode && !selectedFile" class="current-preview">
+          <p>Current Image:</p>
+          <img [src]="'data:image/jpeg;base64,' + getCurrentImage()" class="thumb-preview">
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="productForm.get('name')?.invalid && productForm.get('name')?.touched" style="color: red;">
+      Name is required (min 3 chars).
+    </div>
+
+    <textarea formControlName="description" placeholder="Description"></textarea>
+    <div *ngIf="productForm.get('description')?.invalid && productForm.get('description')?.touched" style="color: red;">
+      Description is required.
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" [disabled]="productForm.invalid" [class.btn-update]="isEditMode">
+        {{ isEditMode ? 'Update Product' : 'Add Product' }}
+      </button>
+
+      <button type="button" *ngIf="isEditMode" (click)="resetForm()" class="btn-new">
+        Add New Product
+      </button>
+    </div>
+  </form>
+
+  <hr>
+
+  <table class="product-table">
+    <thead>
+    <tr>
+      <th>Image</th>
+      <th>Name</th>
+      <th>Category</th>
+      <th>Price</th>
+      <th>Stock</th>
+      <th>Active</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let prod of products; trackBy: trackById">
+      <td>
+        <img *ngIf="prod.byteImg" [src]="'data:image/jpeg;base64,' + prod.byteImg" class="thumb">
+        <div *ngIf="!prod.byteImg" class="thumb placeholder-box">
+          <span>No Image</span>
+        </div>
+      </td>
+      <td>{{ prod.name }}</td>
+      <td>{{ prod.categoryName }}</td>
+      <td>{{ prod.price | currency }}</td>
+      <td [style.color]="prod.quantity < 5 ? 'red' : 'inherit'">
+        {{ prod.quantity }}
+      </td>
+      <td>
+        <span [class]="prod.isActive ? 'status-pill active' : 'status-pill inactive'">
+          {{ prod.isActive ? 'Active' : 'Hidden' }}
+        </span>
+      </td>
+      <td>
+        <button (click)="onAddStock(prod.id!)" class="btn-stock">+ Stock</button>
+        <button (click)="onEdit(prod)" class="btn-edit">Edit</button>
+        <button (click)="onDelete(prod.id!)" class="btn-delete">Delete</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
