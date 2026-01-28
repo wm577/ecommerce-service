@@ -1,10 +1,8 @@
 .metadata/
-.settings/
-.project/
-.classpath
+ecommerce-service/.metadata/
 target/
 bin/
 node_modules/
-.angular/
-dist/
-.vscode/
+.settings/
+.project
+.classpath
