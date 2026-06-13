@@ -1,0 +1,99 @@
+/* Container Spacing */
+.container {
+  max-width: 1000px;
+  padding-bottom: 3rem;
+}
+
+/* Page Title */
+h2 {
+  font-weight: 700;
+  color: #2d3748;
+  border-left: 5px solid #0d6efd;
+  padding-left: 15px;
+}
+
+/* Order Card Styling */
+.order-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border-radius: 12px;
+  background-color: #ffffff;
+}
+
+.order-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Section Specifics */
+.order-info h5 {
+  color: #1a202c;
+  font-weight: 600;
+}
+
+.order-summary .h5 {
+  font-weight: 700;
+  color: #2d3748;
+}
+
+/* Status Badge Styling (Matches Details Page) */
+.badge {
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.status-placed {
+  background-color: #e3f2fd;
+  color: #0d6efd;
+  border: 1px solid #0d6efd;
+}
+
+.status-shipped {
+  background-color: #fff3e0;
+  color: #ef6c00;
+  border: 1px solid #ef6c00;
+}
+
+.status-delivered {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  border: 1px solid #2e7d32;
+}
+
+.status-cancelled {
+  background-color: #ffebee;
+  color: #c62828;
+  border: 1px solid #c62828;
+}
+
+/* Button Styling */
+.btn-outline-primary {
+  border-width: 2px;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 0.4rem 1.2rem;
+}
+
+.btn-outline-primary:hover {
+  background-color: #0d6efd;
+  color: white;
+}
+
+/* Empty State Icon */
+.bi-bag-x {
+  opacity: 0.5;
+}
+
+/* Responsive spacing for mobile */
+@media (max-width: 767.98px) {
+  .card-body {
+    padding: 1.25rem;
+  }
+
+  .order-status {
+    margin-bottom: 1rem;
+  }
+
+  .order-action button {
+    width: 100%;
+  }
+}

@@ -1,0 +1,176 @@
+.shop-container {
+  padding: 2rem;
+  background-color: #fcfcfc;
+}
+
+.productlist-table th {
+  text-align: left;
+  padding: 15px;
+  color: #888;
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+}
+
+.productlist-table tbody tr {
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  transition: transform 0.2s;
+}
+
+.productlist-table tbody tr:hover {
+  transform: scale(1.005);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.productlist-table td {
+  padding: 15px;
+  vertical-align: middle;
+  border-top: 1px solid #f0f0f0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.thumb {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  /* To prevent layout shifts while the huge string loads */
+  content-visibility: auto;
+}
+
+.placeholder-box {
+  background: #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  color: #aaa;
+}
+
+.name-category {
+  display: flex;
+  flex-direction: column;
+}
+
+.prod-name {
+  font-weight: 600;
+  color: #333;
+}
+
+.prod-category {
+  font-size: 0.75rem;
+  color: #007bff;
+  background: #e7f1ff;
+  padding: 2px 8px;
+  border-radius: 10px;
+  width: fit-content;
+  margin-top: 4px;
+}
+
+/* Price and Stock */
+.price-cell {
+  font-weight: 700;
+  color: #27ae60;
+}
+
+.desc-cell {
+  max-width: 300px;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* Add to Cart Button */
+.btn-add {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.3s;
+  white-space: nowrap;
+}
+
+.btn-add:hover {
+  background-color: #000;
+}
+
+/* Update these specific classes */
+
+.product-cell {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Adds consistent space between image and text */
+  min-width: 250px; /* Prevents the name column from getting too narrow */
+}
+
+.thumb {
+  /* Use 'min' and 'max' to force the size */
+  width: 60px !important;
+  height: 60px !important;
+  min-width: 60px;
+  min-height: 60px;
+
+  object-fit: cover;
+  object-position: center;
+  border-radius: 8px;
+  border: 1px solid #eee;
+  flex-shrink: 0; /* CRITICAL: Prevents flexbox from shrinking the image */
+}
+
+/* Ensure placeholder box matches exactly */
+.placeholder-box {
+  width: 60px;
+  height: 60px;
+  background-color: #f5f5f5;
+  border: 1px dashed #ccc;
+}
+
+.product-cell {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Adds consistent space between image and text */
+  min-width: 250px; /* Prevents the name column from getting too narrow */
+}
+
+/* 1. Force the table to respect widths */
+.productlist-table {
+  table-layout: fixed; /* This is the "magic" property for fixed layouts */
+  width: 100%;
+}
+
+/* 2. Assign specific column widths */
+.productlist-table th:nth-child(1) { width: 25%; } /* Product + Image */
+.productlist-table th:nth-child(2) { width: 35%; } /* Description */
+.productlist-table th:nth-child(3) { width: 15%; } /* Price */
+.productlist-table th:nth-child(4) { width: 10%; } /* Stock */
+.productlist-table th:nth-child(5) { width: 15%; } /* Action button */
+
+/* 3. Handle long descriptions so they don't break the row height */
+.desc-cell {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Shows max 2 lines of text */
+  -webkit-box-orient: vertical;
+  white-space: normal; /* Override your previous nowrap if you want lines */
+}
+
+/* 4. Ensure the image container never changes size */
+.product-cell {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  overflow: hidden; /* Keeps text inside the cell */
+}
+
+@media (max-width: 768px) {
+  .productlist-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}

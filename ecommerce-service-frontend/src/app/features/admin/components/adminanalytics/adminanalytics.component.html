@@ -1,0 +1,105 @@
+<div class="analytics-wrapper">
+  @if (analyticsService.summary(); as data) {
+
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-header">
+          <span class="kpi-label">Monthly Revenue</span>
+          <div class="growth-pill" [class.down]="data.earningGrowth < 0">
+            <i class="bi" [class]="data.earningGrowth >= 0 ? 'bi-graph-up' : 'bi-graph-down'"></i>
+            {{ data.earningGrowth | number:'1.1-1' }}%
+          </div>
+        </div>
+        <h2 class="kpi-value">{{ data.currentMonthEarnings | currency }}</h2>
+        <div class="kpi-footer">
+          <span class="prev-val">Prev: {{ data.previousMonthEarnings | currency }}</span>
+        </div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-header">
+          <span class="kpi-label">Total Orders</span>
+          <div class="growth-pill" [class.down]="data.orderGrowth < 0">
+            <i class="bi" [class]="data.orderGrowth >= 0 ? 'bi-graph-up' : 'bi-graph-down'"></i>
+            {{ data.orderGrowth | number:'1.1-1' }}%
+          </div>
+        </div>
+        <h2 class="kpi-value">{{ data.currentMonthOrders }}</h2>
+        <div class="kpi-footer">
+          <span class="prev-val">Prev: {{ data.previousMonthOrders }} Orders</span>
+        </div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-header">
+          <span class="kpi-label">Avg. Order Value</span>
+        </div>
+        <h2 class="kpi-value">{{ data.averageOrderValue | currency }}</h2>
+        <div class="kpi-footer">
+          <span class="prev-val">Efficiency per transaction</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pipeline-container">
+      <div class="pipeline-header">
+        <div>
+          <h3 class="pipeline-title">Order Fulfillment Pipeline</h3>
+          <p class="pending-text">Handling <strong>{{ totalPending() }}</strong> active orders</p>
+        </div>
+        <button class="btn-refresh" (click)="refresh()">
+          <i class="bi bi-arrow-clockwise"></i> Refresh Now
+        </button>
+      </div>
+
+<!--      <div style="background: yellow; color: black; padding: 10px;">-->
+<!--        DEBUG DATA: Placed: {{data.placed}} | Shipped: {{data.shipped}} | Delivered: {{data.delivered}}-->
+<!--      </div>-->
+
+      <div class="pipeline-track">
+        <div class="step-card placed">
+          <div class="step-icon">
+            <i class="bi bi-basket-fill"></i>
+            <span class="badge">{{ data.placed }}</span>
+          </div>
+          <div class="step-info">
+            <span class="label">Placed</span>
+            <p class="desc">New Orders</p>
+          </div>
+        </div>
+
+        <div class="connector"><i class="bi bi-chevron-right"></i></div>
+
+        <div class="step-card shipped">
+          <div class="step-icon">
+            <i class="bi bi-truck"></i>
+            <span class="badge">{{ data.shipped }}</span>
+          </div>
+          <div class="step-info">
+            <span class="label">Shipped</span>
+            <p class="desc">In Transit</p>
+          </div>
+        </div>
+
+        <div class="connector"><i class="bi bi-chevron-right"></i></div>
+
+        <div class="step-card delivered">
+          <div class="step-icon">
+            <i class="bi bi-check-circle-fill"></i>
+            <span class="badge">{{ data.delivered }}</span>
+          </div>
+          <div class="step-info">
+            <span class="label">Delivered</span>
+            <p class="desc">Fulfilled</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  } @else {
+    <div class="loading-overlay">
+      <div class="spinner"></div>
+      <p>Synchronizing Real-Time Data...</p>
+    </div>
+  }
+</div>

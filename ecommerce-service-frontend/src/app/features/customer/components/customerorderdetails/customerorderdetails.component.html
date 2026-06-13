@@ -1,0 +1,73 @@
+@if (order) {
+  <div class="card shadow-sm border-0">
+    <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
+      <h2 class="mb-0 h4 text-primary">Order #{{ order.id }}</h2>
+      <button class="btn btn-outline-secondary btn-sm" routerLink="/customer/order">
+        <i class="bi bi-arrow-left"></i> Back to My Orders
+      </button>
+    </div>
+
+    <div class="card-body">
+      <div class="row mb-4">
+        <div class="col-md-6">
+          <p class="mb-1 text-muted small text-uppercase fw-bold">Order Date</p>
+          <p class="fs-6">{{ order.orderDate | date:'medium' }}</p>
+          <p class="mb-1 text-muted small text-uppercase fw-bold">Customer</p>
+          <p class="fs-6">{{ order.userName }}</p>
+        </div>
+        <div class="col-md-6 text-md-end">
+          <p class="mb-1 text-muted small text-uppercase fw-bold">Status</p>
+          <span class="badge bg-primary rounded-pill px-3 py-2">
+            {{ order.status }}
+          </span>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-hover align-middle border-top">
+          <thead class="table-light">
+          <tr>
+            <th>Product</th>
+            <th class="text-center">Price</th>
+            <th class="text-center">Qty</th>
+            <th class="text-end">Subtotal</th>
+          </tr>
+          </thead>
+          <tbody>
+            @for (item of order.orderItems; track item.productId) {
+              <tr>
+                <td>
+                  <span class="fw-bold d-block text-dark">{{ item.productName }}</span>
+                  <small class="text-muted">Item ID: {{ item.productId }}</small>
+                </td>
+                <td class="text-center">{{ item.priceAtPurchase | currency }}</td>
+                <td class="text-center">{{ item.quantity }}</td>
+                <td class="text-end fw-bold">{{ (item.priceAtPurchase * item.quantity) | currency }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <div class="row justify-content-end mt-4">
+        <div class="col-md-5">
+          <div class="p-3 bg-light rounded">
+            <div class="d-flex justify-content-between mb-2">
+              <span class="text-muted">Subtotal:</span>
+              <span>{{ order.totalAmount | currency }}</span>
+            </div>
+            <div class="d-flex justify-content-between mb-2 text-danger">
+              <span>Discount:</span>
+              <span>-{{ order.discountAmount | currency }}</span>
+            </div>
+            <hr>
+            <div class="d-flex justify-content-between h5 fw-bold mb-0">
+              <span>Total Amount:</span>
+              <span class="text-primary">{{ order.netAmount | currency }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+}

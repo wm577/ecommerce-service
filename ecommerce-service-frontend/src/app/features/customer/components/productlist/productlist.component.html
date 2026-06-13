@@ -1,0 +1,62 @@
+<div class="shop-wrapper">
+  <div class="search-container">
+    <label for="prod-search">Search:</label>
+    <input #searchInput type="search" id="prod-search" autocomplete="off" placeholder="Search by name..." />
+    <button class="btn-search" (click)="getProductByName(searchInput.value)">Search</button>
+    <button class="btn-clear" (click)="searchInput.value=''; resetSearch()">Clear</button>
+  </div>
+
+  <div class="shop-container">
+    <table class="productlist-table">
+    </table>
+
+    <div *ngIf="productList().length === 0" class="no-results">
+      No products found matching your criteria.
+    </div>
+  </div>
+</div>
+
+<div class="shop-container">
+  <table class="productlist-table">
+  </table>
+</div>
+
+<div class="shop-container">
+  <table class="productlist-table">
+    <thead>
+    <tr>
+      <th>Product</th> <th>Price ($)</th>
+      <th>Stock</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let prod of productList()">
+      <td class="product-cell">
+        <div class="product-info-wrapper">
+          <img *ngIf="prod.byteImg" [src]="'data:image/jpeg;base64,' + prod.byteImg" class="thumb">
+          <div *ngIf="!prod.byteImg" class="thumb placeholder-box">
+            <span>No Image</span>
+          </div>
+
+          <div class="name-details">
+            <span class="prod-name">{{ prod.name }}</span>
+            <span class="prod-category">{{ prod.categoryName }}</span>
+            <p class="prod-description-sub">{{ prod.description }}</p>
+          </div>
+        </div>
+      </td>
+
+      <td class="price-cell">{{ prod.price | currency }}</td>
+      <td class="stock-cell" [style.color]="prod.quantity < 5 ? '#e74c3c' : '#2c3e50'">
+        {{ prod.quantity }}
+      </td>
+      <td>
+        <button (click)="addToCart(prod.id!)" class="btn-add">
+          + Add To Cart
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

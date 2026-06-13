@@ -1,0 +1,92 @@
+<div class="admin-container">
+  <div class="header-section">
+    <div>
+      <h2 class="dashboard-title">Order Management</h2>
+      <p class="subtitle">Linear fulfillment tracking for customer orders</p>
+    </div>
+    <button class="btn-refresh" (click)="loadAllPlacedOrders()">
+      <i class="bi bi-arrow-clockwise"></i> Refresh List
+    </button>
+  </div>
+
+  @if (isLoading()) {
+    <div class="loader-state">
+      <div class="spinner"></div>
+      <p>Updating order data...</p>
+    </div>
+  } @else if (adminOrderList().length > 0) {
+    <div class="table-card shadow-sm">
+      <table class="admin-table">
+        <thead>
+        <tr>
+          <th>Order ID</th>
+          <th>Date & Time</th>
+          <th>Customer</th>
+          <th>Net Total</th>
+          <th>Status</th>
+          <th class="text-center">Quick Actions</th>
+          <th class="text-center">Order Details</th>
+        </tr>
+        </thead>
+        <tbody>
+          @for (order of adminOrderList(); track order.id) {
+            <tr>
+              <td class="order-id">#{{ order.id }}</td>
+              <td class="date-cell">
+                <span class="d-block">{{ order.orderDate | date:'mediumDate' }}</span>
+                <small class="text-muted">{{ order.orderDate | date:'shortTime' }}</small>
+              </td>
+              <td class="customer-cell">
+                <div class="user-info">
+                  <div class="avatar">{{ order.userName.charAt(0) }}</div>
+                  <span>{{ order.userName }}</span>
+                </div>
+              </td>
+              <td class="amount-cell">{{ order.netAmount | currency }}</td>
+              <td>
+                <span class="status-pill" [class]="order.status.toLowerCase()">
+                  {{ order.status }}
+                </span>
+              </td>
+
+              <td class="text-center action-column">
+                <div class="action-group">
+
+                  @if (order.status === 'PLACED') {
+                    <button class="btn-linear ship" (click)="updateStatus(order.id, 'SHIPPED')">
+                      <i class="bi bi-truck me-2"></i> Ship Order
+                    </button>
+                  }
+
+                  @else if (order.status === 'SHIPPED') {
+                    <button class="btn-linear deliver" (click)="updateStatus(order.id, 'DELIVERED')">
+                      <i class="bi bi-check-circle-fill me-2"></i> Mark Delivered
+                    </button>
+                  }
+
+                  @else {
+                    <span class="finished-label">
+                      <i class="bi bi-patch-check"></i> Fulfilled
+                    </span>
+                  }
+                </div>
+              </td>
+
+              <td class="text-center">
+                <button class="btn-manage" (click)="viewDetails(order.id)">
+                  Go to Details
+                </button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  } @else {
+    <div class="empty-admin-state">
+      <i class="bi bi-inbox fs-1"></i>
+      <h3>No Active Orders</h3>
+      <p>All orders have been successfully fulfilled.</p>
+    </div>
+  }
+</div>

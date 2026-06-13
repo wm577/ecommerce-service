@@ -1,0 +1,111 @@
+.admin-container {
+  padding: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Form Layout */
+.coupon-form {
+  background: #f9f9f9;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Two columns */
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.form-grid input {
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form-grid input:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0,123,255,0.25);
+}
+
+/* Error Messages */
+.error-text {
+  font-size: 0.85rem;
+  margin-top: -0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Action Buttons */
+.form-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn-new {
+  background-color: #28a745;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-new:disabled {
+  background-color: #94d3a2;
+  cursor: not-allowed;
+}
+
+.btn-cancel {
+  background-color: #dc3545;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Table Styling */
+.product-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.product-table th, .product-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.product-table th {
+  background-color: #f4f4f4;
+  color: #333;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+}
+
+.product-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+.btn-new:disabled {
+  background-color: #6c757d; /* Grey out when saving or invalid */
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* Responsive adjustment */
+@media (max-width: 600px) {
+  .form-grid {
+    grid-template-columns: 1fr; /* Stack inputs on small screens */
+  }
+}

@@ -1,0 +1,121 @@
+.admin-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 20px;
+  font-family: 'Inter', system-ui, sans-serif;
+  color: #1e293b;
+}
+
+.header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.dashboard-title { font-weight: 800; font-size: 1.75rem; margin: 0; }
+.subtitle { color: #64748b; font-size: 0.9rem; }
+
+.table-card {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-table th {
+  background: #f8fafc;
+  padding: 1rem;
+  text-align: left;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.admin-table td {
+  padding: 1rem;
+  border-bottom: 1px solid #f1f5f9;
+  vertical-align: middle;
+}
+
+.status-pill {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+.status-pill.placed { background: #e0f2fe; color: #0369a1; }
+.status-pill.shipped { background: #fef3c7; color: #92400e; }
+.status-pill.delivered { background: #dcfce7; color: #15803d; }
+
+.action-column { min-width: 180px; }
+
+.btn-linear {
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: none;
+  font-weight: 700;
+  font-size: 0.8rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.btn-linear.ship {
+  background: #fff8eb;
+  color: #b45309;
+  border: 1px solid #fde68a;
+}
+.btn-linear.ship:hover { background: #fef3c7; }
+
+.btn-linear.deliver {
+  background: #f0fdf4;
+  color: #15803d;
+  border: 1px solid #bbf7d0;
+}
+.btn-linear.deliver:hover { background: #dcfce7; }
+
+.finished-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-manage {
+  background: #ef6c00;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.btn-refresh {
+  background: white; border: 1px solid #cbd5e0;
+  padding: 8px 16px; border-radius: 6px; font-weight: 600; cursor: pointer;
+}
+
+.spinner {
+  width: 30px; height: 30px; border: 3px solid #f3f3f3;
+  border-top: 3px solid #3b82f6; border-radius: 50%;
+  margin: 0 auto 10px; animation: spin 1s linear infinite;
+}
+@keyframes spin { 100% { transform: rotate(360deg); } }
