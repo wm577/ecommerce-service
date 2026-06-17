@@ -11,8 +11,8 @@ A full-stack e-commerce application featuring a robust Spring Boot microservice 
 
 The workspace is organized as a unified monorepo:
 
-* **`/backend`**: Spring Boot application (REST API, Spring Data JPA, Spring Security).
-* **`/frontend`**: Angular web client responsive user interface.
+* **`/ecommerce-service`**: Spring Boot application (REST API, Spring Data JPA, Spring Security).
+* **`/ecommerce-service-frontend`**: Angular web client responsive user interface.
 * **`/database`**: Database schema initialization scripts and `.sql` dumps.
 
 ---
